@@ -2,7 +2,8 @@
   "name": "jsbn-rsa",
   "version": "1.0.1",
   "description": "Js biginteger and rsa implementation",
-  "main": "index.js",
+  "main": "jsbn.js",
+  "types":"jsbn.d.ts",
   "repository":{
       "type":"git",
       "url":"https://github.com/nicomazz/jsbn-rsa"
