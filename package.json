@@ -1,0 +1,11 @@
+{
+  "name": "jsbn-rsa",
+  "version": "1.0.1",
+  "description": "Js biginteger and rsa implementation",
+  "main": "index.js",
+  "keywords": [
+    "jsbn",
+    "bigintegers"
+  ],
+  "license": "BSD"
+}
