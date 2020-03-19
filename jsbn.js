@@ -1762,10 +1762,12 @@ if (typeof exports !== 'undefined') {
   exports = module.exports = {
       default: BigInteger,
       BigInteger: BigInteger,
+      RSAKey: RSAKey,
   };
 } else {
   this.jsbn = {
     BigInteger: BigInteger,
+    RSAKey: RSAKey,
   };
 }
 
