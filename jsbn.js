@@ -1605,6 +1605,36 @@ function RSASetPublic(N, E) {
     alert('Invalid RSA public key');
 }
 
+// Set the private key fields N, e, d and CRT params from hex strings
+function RSASetPrivateEx(N,E,D,P,Q,DP,DQ,C) {
+    if(N != null && E != null && N.length > 0 && E.length > 0) {
+      this.n = parseBigInt(N,16);
+      this.e = parseInt(E,16);
+      this.d = parseBigInt(D,16);
+      this.p = parseBigInt(P,16);
+      this.q = parseBigInt(Q,16);
+      this.dmp1 = parseBigInt(DP,16);
+      this.dmq1 = parseBigInt(DQ,16);
+      this.coeff = parseBigInt(C,16);
+    }
+    else
+      alert("Invalid RSA private key");
+  }
+
+// Perform raw private operation on "x": return x^d (mod n)
+function RSADoPrivate(x) {
+  if(this.p == null || this.q == null)
+    return x.modPow(this.d, this.n);
+
+  // TODO: re-calculate any missing CRT params
+  var xp = x.mod(this.p).modPow(this.dmp1, this.p);
+  var xq = x.mod(this.q).modPow(this.dmq1, this.q);
+
+  while(xp.compareTo(xq) < 0)
+    xp = xp.add(this.p);
+  return xp.subtract(xq).multiply(this.coeff).mod(this.p).multiply(this.q).add(xq);
+}
+
 // Perform raw public operation on "x": return x^e (mod n)
 function RSADoPublic(x) {
   return x.modPowInt(this.e, this.n);
@@ -1633,7 +1663,9 @@ function RSAEncrypt(text) {
 RSAKey.prototype.doPublic = RSADoPublic;
 
 // public
+RSAKey.prototype.doPrivate = RSADoPrivate;
 RSAKey.prototype.setPublic = RSASetPublic;
+RSAKey.prototype.setPrivateEx = RSASetPrivateEx;
 RSAKey.prototype.encrypt = RSAEncrypt;
 // RSAKey.prototype.encrypt_b64 = RSAEncryptB64;
 

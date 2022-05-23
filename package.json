@@ -1,6 +1,6 @@
 {
   "name": "jsbn-rsa",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Js biginteger and rsa implementation",
   "main": "jsbn.js",
   "types": "jsbn.d.ts",
