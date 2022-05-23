@@ -1,5 +1,8 @@
 
 export class BigInteger {
+    static ZERO: BigInteger;
+    static ONE: BigInteger;
+
     bitLength(): number;
     clone(): BigInteger;
     divide(n: BigInteger): BigInteger;
